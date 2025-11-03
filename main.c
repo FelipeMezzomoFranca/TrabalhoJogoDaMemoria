@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <windows.h> // Para o sleep no windows
 
-void menuPrincipal(int opcao){
+int menuPrincipal(int opcao){
     do{
         linha();
         printf("           JOGO DA MEMORIA\n");
@@ -15,6 +16,15 @@ void menuPrincipal(int opcao){
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
     } while (opcao < 1 || opcao > 3);
+
+    return opcao;
+}
+
+void novoJogo(){
+    printf("Iniciando um novo jogo...\n");
+    Sleep(2000);
+
+    // Lógica para iniciar um novo jogo seria implementada aqui
 }
 
 void linha(){
@@ -23,8 +33,20 @@ void linha(){
 
 int main() {
     int opcao;
-    menuPrincipal(opcao);
 
-    printf("fim");
+    opcao = menuPrincipal(opcao);
+
+    if (opcao == 1){
+        novoJogo();
+    } else if (opcao == 2){
+        printf("Funcao de carregar jogo indisponivel no momento.\n");
+        Sleep(2000);
+        opcao = menuPrincipal(opcao);
+        printf("%d", opcao);
+    } else if (opcao == 3){ 
+        printf("Saindo do jogo. Ate mais!\n");
+        Sleep(2000);
+    }
+
     return 0;
 }
