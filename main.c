@@ -3,6 +3,50 @@
 #include <string.h>
 #include <locale.h>
 #include <windows.h> // Para o sleep no windows
+#include <stdbool.h>
+
+#define n 4
+#define total (n * n)
+
+// Funções Prototipos
+int menuPrincipal(int opcao);
+void linha();
+
+void novoJogo(int tabuleiro[n][n]){
+    printf("Iniciando um novo jogo...\n");
+    Sleep(2000);
+    system("cls");
+
+    // Lógica para iniciar um novo jogo, implementar aqui o embaralhamento
+}
+
+
+int main() {
+    int opcao;
+    int tabuleiro[n][n];
+
+    // Já ta chamando o menu principal e lendo a opção
+    opcao = menuPrincipal(opcao);
+
+    if (opcao == 1){
+        novoJogo(tabuleiro[n][n]);
+    } else if (opcao == 2){
+        printf("Funcao de carregar jogo indisponivel no momento.\n");
+        Sleep(2000);
+        system("cls");
+        opcao = menuPrincipal(opcao);
+        printf("%d", opcao);
+    } else if (opcao == 3){ 
+        printf("Saindo do jogo. Ate mais!\n");
+        Sleep(2000);
+    }
+
+    return 0;
+}
+
+void linha(){
+    puts("-------------------------------------------------\n");
+}
 
 int menuPrincipal(int opcao){
     do{
@@ -18,35 +62,4 @@ int menuPrincipal(int opcao){
     } while (opcao < 1 || opcao > 3);
 
     return opcao;
-}
-
-void novoJogo(){
-    printf("Iniciando um novo jogo...\n");
-    Sleep(2000);
-
-    // Lógica para iniciar um novo jogo seria implementada aqui
-}
-
-void linha(){
-    puts("-------------------------------------------------\n");
-}
-
-int main() {
-    int opcao;
-
-    opcao = menuPrincipal(opcao);
-
-    if (opcao == 1){
-        novoJogo();
-    } else if (opcao == 2){
-        printf("Funcao de carregar jogo indisponivel no momento.\n");
-        Sleep(2000);
-        opcao = menuPrincipal(opcao);
-        printf("%d", opcao);
-    } else if (opcao == 3){ 
-        printf("Saindo do jogo. Ate mais!\n");
-        Sleep(2000);
-    }
-
-    return 0;
 }
