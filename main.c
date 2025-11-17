@@ -5,19 +5,31 @@
 #include <windows.h> // Para o sleep no windows
 #include <stdbool.h>
 
-#define n 4
-#define total (n * n)
+#define linhas 4
+#define colunas 4
+#define total (linhas * colunas)
+
+typedef struct Carta {
+    int valor;
+    bool revelada;
+} Carta;
 
 // Funções Prototipos
 int menuPrincipal(int opcao);
 void linha();
 
-void novoJogo(int tabuleiro[n][n]){
+void novoJogo(int tabuleiro[linhas][colunas]){
     printf("Iniciando um novo jogo...\n");
     Sleep(2000);
     system("cls");
 
     // Lógica para iniciar um novo jogo, implementar aqui o embaralhamento
+    Carta c1 = {1, false};
+    Carta c2 = {2, false};
+    Carta c3 = {3, false};
+    Carta c4 = {4, false};
+
+    
 }
 
 
@@ -29,7 +41,7 @@ int main() {
     opcao = menuPrincipal(opcao);
 
     if (opcao == 1){
-        novoJogo(tabuleiro[n][n]);
+        novoJogo(tabuleiro[linhas][colunas]);
     } else if (opcao == 2){
         printf("Funcao de carregar jogo indisponivel no momento.\n");
         Sleep(2000);
