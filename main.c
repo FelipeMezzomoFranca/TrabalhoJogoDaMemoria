@@ -18,6 +18,22 @@ typedef struct Carta {
 int menuPrincipal(int opcao);
 void linha();
 
+int* gerarVetorPares(int totalCartas) {
+    if (totalCartas % 2 != 0) return NULL;
+
+    int* vet = malloc(sizeof(int) * totalCartas);
+    if (!vet) return NULL;
+
+    int valor = 1;
+    for (int i = 0; i < totalCartas; i += 2) {
+        vet[i] = valor;
+        vet[i + 1] = valor;
+        valor++;
+    }
+
+    return vet;
+}
+
 void novoJogo(int tabuleiro[linhas][colunas]){
     printf("Iniciando um novo jogo...\n");
     Sleep(2000);
