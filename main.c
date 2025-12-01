@@ -34,6 +34,26 @@ int* gerarVetorPares(int totalCartas) {
     return vet;
 }
 
+bool verificaPar(int valor1, int valor2) {
+    return valor1 == valor2;
+}
+
+int contarCartasReveladas(Carta** tabuleiro, int linhas, int colunas) {
+    int cont = 0;
+
+    for (int i = 0; i < linhas; i++)
+        for (int j = 0; j < colunas; j++)
+            if (tabuleiro[i][j].revelada)
+                cont++;
+
+    return cont;
+}
+
+bool jogoConcluido(int cartasReveladas, int totalCartas) {
+    return cartasReveladas == totalCartas;
+}
+
+
 void novoJogo(int tabuleiro[linhas][colunas]){
     printf("Iniciando um novo jogo...\n");
     Sleep(2000);
