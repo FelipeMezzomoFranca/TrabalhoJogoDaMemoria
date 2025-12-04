@@ -60,12 +60,50 @@ void novoJogo(int tabuleiro[linhas][colunas]){
     system("cls");
 
     // Lógica para iniciar um novo jogo, implementar aqui o embaralhamento
-    Carta c1 = {1, false};
-    Carta c2 = {2, false};
-    Carta c3 = {3, false};
-    Carta c4 = {4, false};
 
-    
+ int totalCartas = total;
+    int* pares = gerarVetorPares(totalCartas);
+
+    Carta cartas[totalCartas];
+
+    for (int i = 0; i < totalCartas; i++) {
+        cartas[i].valor = pares[i];
+        cartas[i].revelada = false;
+    }
+
+    int escolha1, escolha2;
+
+    printf("Digite o indice da primeira carta (0 a %d): ", totalCartas - 1);
+    scanf("%d", &escolha1);
+
+    printf("Digite o indice da segunda carta (0 a %d): ", totalCartas - 1);
+    scanf("%d", &escolha2);
+
+    printf("\nVoce escolheu as cartas %d e %d\n",
+            cartas[escolha1].valor,
+            cartas[escolha2].valor);
+
+    if (verificaPar(cartas[escolha1].valor, cartas[escolha2].valor)) {
+        printf("Par encontrado!\n");
+        cartas[escolha1].revelada = true;
+        cartas[escolha2].revelada = true;
+    } else {
+        printf("Nao eh par.\n");
+    }
+
+    int reveladas = 0;
+    for (int i = 0; i < totalCartas; i++) {
+        if (cartas[i].revelada)
+            reveladas++;
+    }
+
+    printf("\nCartas reveladas ate agora: %d\n", reveladas);
+
+    if (jogoConcluido(reveladas, totalCartas)) {
+        printf("Todas as cartas foram encontradas! Fim do jogo.\n");
+    }
+
+    free(pares);
 }
 
 
