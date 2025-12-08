@@ -31,9 +31,9 @@ O jogador seleciona cartas usando coordenadas e tenta encontrar todos os pares.
 
 Ao iniciar o programa, você verá:
 
-1 - Novo Jogo
-2 - Carregar Jogo
-3 - Sair
+1 - Novo Jogo 
+2 - Carregar Jogo 
+3 - Sair 
 
 ---
 
