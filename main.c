@@ -43,7 +43,7 @@ void continuarJogoCarregado(Carta **tab);
 //-------------------------------------------------------------
 void limparEntrada() {
     int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ((c = getchar()) != '\n' && c != EOF); // Vai spammar o getchar no buffer até encontrar '\n' ou EOF (end of file)
 }
 
 //-------------------------------------------------------------
@@ -123,10 +123,11 @@ Carta** alocarTabuleiro() {
 // PREENCHER TABULEIRO
 //-------------------------------------------------------------
 void preencherTabuleiro(Carta **tab, int *valores) {
-    int k = 0;
-    for (int i = 0; i < LINHAS; i++)
-        for (int j = 0; j < COLUNAS; j++) {
-            tab[i][j].valor = valores[k++];
+    int k = 0; // Índice para o vetor de valores
+    for (int i = 0; i < LINHAS; i++) // Vai do i = 0 até i = 1 (já que LINHAS = 2).
+        for (int j = 0; j < COLUNAS; j++) { //Vai do j = 0 até j = 8 (COLUNAS = 9).
+            tab[i][j].valor = valores[k++]; // Carta recebe o número correspondente do vetor embaralhado
+            // Tirar lixo de memória e inicializar certo
             tab[i][j].revelada = false;
             tab[i][j].encontrada = false;
         }
@@ -136,22 +137,22 @@ void preencherTabuleiro(Carta **tab, int *valores) {
 // EXIBIR TABULEIRO
 //-------------------------------------------------------------
 void exibirTabuleiro(Carta **tab) {
-    printf("\nTABULEIRO:\n\n");
+    printf("\nTABULEIRO:\n\n"); // Título
 
-    printf("      ");
-    for (int c = 1; c <= COLUNAS; c++)
+    printf("      "); // Alinhar
+    for (int c = 1; c <= COLUNAS; c++) // Printa os números das colunas
         printf(" %2d ", c);
     printf("\n");
 
-    printf("      ");
-    for (int c = 1; c <= COLUNAS; c++)
+    printf("      "); // Alinhar
+    for (int c = 1; c <= COLUNAS; c++) // Printa a linha de separação
         printf("----");
     printf("\n");
 
-    for (int i = 0; i < LINHAS; i++) {
-        printf(" %2d | ", i + 1);
+    for (int i = 0; i < LINHAS; i++) { 
+        printf(" %2d | ", i + 1); // Printa o número da linha
 
-        for (int j = 0; j < COLUNAS; j++) {
+        for (int j = 0; j < COLUNAS; j++) { //Vai do j = 0 até j = 8 (COLUNAS = 9).
             if (tab[i][j].encontrada)
                 printf(" -  ");
             else if (tab[i][j].revelada)
@@ -166,33 +167,37 @@ void exibirTabuleiro(Carta **tab) {
 //-------------------------------------------------------------
 // ESCOLHER CARTA (com validação e entrada robusta)
 //-------------------------------------------------------------
-void escolherCarta(Carta **tab, int *l, int *c, const char *texto) {
+void escolherCarta(Carta **tab, int *l, int *c, const char *texto) { // Pega o tabuleiro, ponteiros para linha e coluna, e o texto a ser exibido
 
-    while (1) {
-        printf("%s (linha coluna): ", texto);
+    while (1) { // Infinito até uma posição valida
+        printf("%s (linha coluna): ", texto); // Exibe o texto passado
 
-        if (scanf("%d %d", l, c) != 2) {
+        if (scanf("%d %d", l, c) != 2) { // Scanf só retorna 2 quando lê dois INTEIROS
             printf("Entrada invalida! Digite dois numeros.\n");
             limparEntrada();
             Sleep(1200);
             continue;
         }
 
+        // Usuario pensa em linha 1, linha 2 mas o array começa em 0
         *l -= 1;
         *c -= 1;
 
+        // Verifica se a posição está dentro dos limites do tabuleiro
         if (*l < 0 || *l >= LINHAS || *c < 0 || *c >= COLUNAS) {
             printf("Posicao fora do tabuleiro!\n");
             Sleep(1000);
             continue;
         }
 
+        // Verifica se a carta já foi encontrada ou revelada
         if (tab[*l][*c].encontrada) {
             printf("Carta já encontrada!\n");
             Sleep(1000);
             continue;
         }
 
+        // Verifica se a carta já está revelada nesta jogada
         if (tab[*l][*c].revelada) {
             printf("Carta já revelada nesta jogada!\n");
             Sleep(1000);
